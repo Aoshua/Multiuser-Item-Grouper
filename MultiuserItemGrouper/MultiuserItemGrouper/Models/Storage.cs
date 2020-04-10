@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 
 namespace MultiuserItemGrouper.Models
 {
-    public class Storage
+    public static class Storage
     {
-
         //private list holding the objects of groups.
-
-        
     }
 }
