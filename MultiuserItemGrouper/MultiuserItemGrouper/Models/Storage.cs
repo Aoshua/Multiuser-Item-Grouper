@@ -11,15 +11,23 @@ namespace MultiuserItemGrouper.Models
         //private list holding the objects of groups.
 
         //object for the group
-            //holds object name
+            //holds group name
+            //group ID
             //owner
             //list of item object
 
         //object for the items
             //holds item name
             //holds item's text
-            //item owner's name
+            //groupID
+            //itemID
+            //owner
             //hidden boolean
+            //locked boolean
+
+        //object for owner
+            //owner name
+            //owner id
 
 
         //create group
@@ -28,12 +36,16 @@ namespace MultiuserItemGrouper.Models
 
         //return group's
 
+        //delete group
 
         //create item
 
         //update item
+            //unlock item
 
         //delete item
+
+        //lock item
 
         //return items for given group ( and info)
     }
