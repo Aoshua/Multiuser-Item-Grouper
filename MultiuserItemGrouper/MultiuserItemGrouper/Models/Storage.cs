@@ -18,6 +18,8 @@ namespace MultiuserItemGrouper.Models
         //object for the items
             //holds item name
             //holds item's text
+            //item owner's name
+            //hidden boolean
 
 
         //create group
@@ -30,6 +32,8 @@ namespace MultiuserItemGrouper.Models
         //create item
 
         //update item
+
+        //delete item
 
         //return items for given group ( and info)
     }
