@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body style="background-color: whitesmoke;">
+    <form asp-action="LogUser" method="post">
+        <div class="container-fluid" style="display: flex; justify-content: center; align-items: center;">
+            <div style="padding: 200px">
+                <h1 style="text-align: center; margin-bottom: 25px;">Grouper</h1>
+                <div style="background-color: #fff; width: 350px; padding: 15px; ">
+                    <div class="form-group">
+                        <label for="txtUsername">Username:</label>
+                        <input type="text" class="form-control" id="txtUsername" name="txtUsername" placeholder="Enter Username">
+                    </div>
+                    <div style="text-align: center;">
+                        <input type="submit" name="btnLogin" value="Login" class="btn btn-primary" style="width: 100%;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
