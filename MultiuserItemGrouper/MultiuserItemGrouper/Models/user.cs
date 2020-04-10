@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MultiuserItemGrouper.Models
 {
-    public class User
+    public class user
     {
         //object for owner
             //owner name
