@@ -16,9 +16,9 @@ namespace MultiuserItemGrouper.Controllers
             return View();
         }
 
-        public void LogUser()
+        public void LogUser(string txtUsername)
         {
-            System.Diagnostics.Debug.Write("I was invoked.");
+            var username = txtUsername;
         }
     }
 }
