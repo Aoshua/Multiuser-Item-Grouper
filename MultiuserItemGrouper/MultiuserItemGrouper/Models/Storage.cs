@@ -10,6 +10,7 @@ namespace MultiuserItemGrouper.Models
     {
         //private list holding the objects of groups.
         private List<Group> AllGroups { get; set; }//holds all the groups
+        private List<int> GroupIDs { get; set; }//keeps track of all the group ID's
 
 
         //update group <- don't see use in this List
@@ -19,17 +20,47 @@ namespace MultiuserItemGrouper.Models
         {
             AllGroups.Add(group);
         }
+        //add group overload
+        public void AddGroup(string name, User user)
+        {
+            int maxID = 0;
+            foreach (int i in GroupIDs)
+            {
+                if(maxID <= i)
+                {
+                    maxID = i + 1;
+                }
+            }
+
+            Group group = new Group();
+            group.createGroup(maxID, name, user);
+            AllGroups.Add(group);
+        }
 
         //delete group
-        public void DeleteGroup(Group group)
+        public void DeleteGroup(Group group, User user)
         {
-            AllGroups.Remove(group);
+            if (group.Owner == user)
+            {
+                AllGroups.Remove(group);
+            }
         }
 
         //return group's
         public string GetGroups()
         {
             string json = JsonConvert.SerializeObject(AllGroups, Formatting.None);
+            return json;
+        }
+        //return group's names
+        public string GetGroupNames()
+        {
+            List<string> names = new List<string>();
+            foreach (Group group in AllGroups)
+            {
+                names.Add(group.GroupName);
+            }
+            string json = JsonConvert.SerializeObject(names, Formatting.None);
             return json;
         }
 
@@ -76,11 +107,35 @@ namespace MultiuserItemGrouper.Models
             {
                 if(group.GroupID == groups.GroupID)
                 {
-                    return group.returnItems(user);
+                    return groups.returnItems(user);
                 }
             }
             return "";
         }
 
+        //return items overload
+        public string ReturnItemsInGroup(int groupID, User user)
+        {
+            foreach (Group groups in AllGroups)
+            {
+                if (groupID == groups.GroupID)
+                {
+                    return groups.returnItems(user);
+                }
+            }
+            return "";
+        }
+        //return items overload
+        public string ReturnItemsInGroup(int groupID, int UserID)
+        {
+            foreach (Group groups in AllGroups)
+            {
+                if (groupID == groups.GroupID)
+                {
+                    return groups.returnItems(UserID);
+                }
+            }
+            return "";
+        }
     }
 }

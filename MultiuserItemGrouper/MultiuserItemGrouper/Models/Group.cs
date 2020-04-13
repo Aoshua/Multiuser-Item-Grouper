@@ -19,14 +19,22 @@ namespace MultiuserItemGrouper.Models
         {
         }
         //create group
-        public void create(Group group)
+        public void createGroup(Group group)
         {
             this.GroupID = group.GroupID;
             this.GroupName = group.GroupName;
             this.Owner = group.Owner;
             this.ItemList = group.ItemList;
         }
-
+        
+        //create group overload
+        public void createGroup(int ID, string name, User owner)
+        {
+            this.GroupID = ID;
+            this.GroupName = name;
+            this.Owner = owner;
+            this.ItemList = new List<Item>();
+        }
 
 
         //add Item
@@ -69,6 +77,23 @@ namespace MultiuserItemGrouper.Models
             foreach (Item items in ItemList)
             {
                 if(items.IsHidden == false || items.IsHidden == true && items.UserID == user.Id)
+                {
+                    Itemlist.Add(items);
+                }
+
+            }
+
+            string json = JsonConvert.SerializeObject(ItemList, Formatting.None);
+            return json;
+        }
+
+        //getItemlist overload
+        public string returnItems(int user)
+        {
+            List<Item> Itemlist = new List<Item>();
+            foreach (Item items in ItemList)
+            {
+                if (items.IsHidden == false || items.IsHidden == true && items.UserID == user)
                 {
                     Itemlist.Add(items);
                 }
