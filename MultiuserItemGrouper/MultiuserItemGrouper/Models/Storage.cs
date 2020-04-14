@@ -19,6 +19,7 @@ namespace MultiuserItemGrouper.Models
         public void AddGroup(Group group)
         {
             AllGroups.Add(group);
+            GroupIDs.Add(group.GroupID);
         }
         //add group overload
         public void AddGroup(string name, User user)
