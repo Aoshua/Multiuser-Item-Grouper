@@ -36,6 +36,7 @@ namespace MultiuserItemGrouper.Models
             this.ItemList = new List<Item>();
         }
 
+        // Use Context.Items has 
 
         //add Item
         public void addItem(Item item)
@@ -71,7 +72,7 @@ namespace MultiuserItemGrouper.Models
         }
         
         //getItemlist
-        public string returnItems(user user)
+        public string returnItems(string user)
         {
             List<Item> Itemlist = new List<Item>();
             foreach (Item items in ItemList)

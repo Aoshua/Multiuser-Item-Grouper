@@ -11,9 +11,7 @@ namespace MultiuserItemGrouper.Models
         //private list holding the objects of groups.
         private static List<Group> AllGroups { get; set; }//holds all the groups
         private static List<int> GroupIDs { get; set; }//keeps track of all the group ID's
-
-        public static List<user> Users { get; set; }
-
+        public static List<User> Users { get; set; }
 
         //update group <- don't see use in this List
 
@@ -23,6 +21,7 @@ namespace MultiuserItemGrouper.Models
             AllGroups.Add(group);
             GroupIDs.Add(group.GroupID);
         }
+
         //add group overload
         public static void AddGroup(string name, string user)
         {
@@ -55,6 +54,7 @@ namespace MultiuserItemGrouper.Models
             string json = JsonConvert.SerializeObject(AllGroups, Formatting.None);
             return json;
         }
+
         //return group's names
         public static string GetGroupNames()
         {
@@ -104,7 +104,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //return items
-        public static string ReturnItemsInGroup(Group group, user user)
+        public static string ReturnItemsInGroup(Group group, string user)
         {
             foreach(Group groups in AllGroups)
             {
@@ -117,7 +117,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //return items overload
-        public static string ReturnItemsInGroup(int groupID, user user)
+        public static string ReturnItemsInGroup(int groupID, string user)
         {
             foreach (Group groups in AllGroups)
             {
@@ -139,20 +139,6 @@ namespace MultiuserItemGrouper.Models
                 }
             }
             return "";
-        }
-
-        public static  user getUser(string username)
-        {
-            foreach (user user in Users)
-            {
-                if(user.Name == username)
-                {
-                    return user;
-                }
-            }
-            user newUser = new user(username);
-            Users.Add(newUser);
-            return newUser;
         }
     }
 }
