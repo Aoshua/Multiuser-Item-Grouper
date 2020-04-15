@@ -17,12 +17,20 @@ namespace MultiuserItemGrouper.Controllers
             return View();
         }
 
-        public void LogUser(string txtUsername)
+        public IActionResult LogUser(string txtUsername)
         {
             // If the list does not contain another username with the same name, add the
             // username to the list of users.
             if(Storage.Users.Where(u => u.Name == txtUsername).Count() == 0)
+            {
                 Storage.Users.Add(new User(txtUsername, Storage.Users.Count() + 1));
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // Inform user that that name is taken
+                return View();
+            }
         }
     }
 }
