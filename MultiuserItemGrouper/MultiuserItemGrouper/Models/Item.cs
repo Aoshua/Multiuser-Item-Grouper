@@ -7,55 +7,49 @@ namespace MultiuserItemGrouper.Models
 {
     public class Item
     {
-        //object for the items
-        public int ItemID { get; set; }//itemID
-        public string ItemName { get; set; }//holds item name
-        public string ItemText { get; set; }//holds item's text
-        public int GroupID { get; set; }//groupID
-        public int UserID { get; set; }//owner
-        public bool IsHidden { get; set; }//hidden boolean
-        public bool IsLocked { get; set; }//locked boolean
+        public static int ItemCount = 0;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Body { get; set; }
+        public string Owner { get; set; }
+        public bool IsHidden { get; set; }
+        public bool IsLocked { get; set; }
 
         //create item
-        public Item(Item newitem)
+        public Item(string name, string body, string owner)
         {
-            ItemName = newitem.ItemName;
-            ItemText = newitem.ItemText;
-            GroupID = newitem.GroupID;
-            ItemID = newitem.ItemID;
-            UserID = newitem.UserID;
-            IsHidden = newitem.IsHidden;
-            IsLocked = newitem.IsLocked;
-        }
-        public Item()
-        {
-            ItemName = "";
-            ItemText = "";
-            GroupID = -1;
-            ItemID = -1;
-            UserID = -1;
-            IsHidden = false;
-            IsLocked = false;
-        }
-        //update item
-        public void updateItem(Item newitem)
-        {
-            //loop through to find the right item then do this.
-            ItemName = newitem.ItemName;
-            ItemText = newitem.ItemText;
-            GroupID = newitem.GroupID;
-            ItemID = newitem.ItemID;
-            UserID = newitem.UserID;
-            IsHidden = newitem.IsHidden;
-            IsLocked = newitem.IsLocked;
+            // ItemIDs are based off the ItemCount,
+            // which shall increment each time a new Item is created.
+            this.Id = ItemCount;
+            ItemCount++;
+
+            this.Name = name;
+            this.Body = body;
+            this.Owner = owner;
+            this.IsHidden = false;
+            this.IsLocked = false;
         }
 
-        //unlock item
+        public SerializableItem ConvertToSerializableItem()
+        {
+            SerializableItem si = new SerializableItem
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Body = this.Body,
+                IsLocked = this.IsLocked,
+                IsHidden = this.IsHidden
+            };
+            return si;
+        }
+    }
 
-        //lock item
-
-        //delete item
-
-        
+    public struct SerializableItem
+    {
+        public int Id;
+        public string Name;
+        public string Body;
+        public bool IsLocked;
+        public bool IsHidden;
     }
 }

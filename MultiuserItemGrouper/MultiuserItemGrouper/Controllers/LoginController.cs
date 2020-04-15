@@ -19,18 +19,8 @@ namespace MultiuserItemGrouper.Controllers
 
         public IActionResult LogUser(string txtUsername)
         {
-            // If the list does not contain another username with the same name, add the
-            // username to the list of users.
-            if(Storage.Users.Where(u => u.Name == txtUsername).Count() == 0)
-            {
-                Storage.Users.Add(new User(txtUsername));
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                // Inform user that that name is taken
-                return View();
-            }
+            // todo: add context item when user logs in
+            return View();
         }
     }
 }
