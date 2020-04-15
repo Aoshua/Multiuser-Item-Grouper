@@ -23,7 +23,7 @@ namespace MultiuserItemGrouper.Controllers
             // username to the list of users.
             if(Storage.Users.Where(u => u.Name == txtUsername).Count() == 0)
             {
-                Storage.Users.Add(new User(txtUsername));
+                Storage.Users.Add(new user(txtUsername));
                 return RedirectToAction("Index", "Home");
             }
             else

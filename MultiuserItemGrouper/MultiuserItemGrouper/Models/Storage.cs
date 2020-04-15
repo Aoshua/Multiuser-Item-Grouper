@@ -12,7 +12,7 @@ namespace MultiuserItemGrouper.Models
         private static List<Group> AllGroups { get; set; }//holds all the groups
         private static List<int> GroupIDs { get; set; }//keeps track of all the group ID's
 
-        public static List<User> Users { get; set; }
+        public static List<user> Users { get; set; }
 
 
         //update group <- don't see use in this List
@@ -104,7 +104,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //return items
-        public static string ReturnItemsInGroup(Group group, User user)
+        public static string ReturnItemsInGroup(Group group, user user)
         {
             foreach(Group groups in AllGroups)
             {
@@ -117,7 +117,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //return items overload
-        public static string ReturnItemsInGroup(int groupID, User user)
+        public static string ReturnItemsInGroup(int groupID, user user)
         {
             foreach (Group groups in AllGroups)
             {
@@ -141,16 +141,16 @@ namespace MultiuserItemGrouper.Models
             return "";
         }
 
-        public static  User getUser(string username)
+        public static  user getUser(string username)
         {
-            foreach (User user in Users)
+            foreach (user user in Users)
             {
                 if(user.Name == username)
                 {
                     return user;
                 }
             }
-            User newUser = new User(username);
+            user newUser = new user(username);
             Users.Add(newUser);
             return newUser;
         }

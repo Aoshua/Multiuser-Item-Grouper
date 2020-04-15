@@ -71,7 +71,7 @@ namespace MultiuserItemGrouper.Models
         }
         
         //getItemlist
-        public string returnItems(User user)
+        public string returnItems(user user)
         {
             List<Item> Itemlist = new List<Item>();
             foreach (Item items in ItemList)
