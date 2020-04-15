@@ -158,7 +158,6 @@ namespace MultiuserItemGrouper.Models
             User newUser = new User(username, maxID);
             AllUsers.Add(newUser);
             return newUser;
-            
         }
     }
 }
