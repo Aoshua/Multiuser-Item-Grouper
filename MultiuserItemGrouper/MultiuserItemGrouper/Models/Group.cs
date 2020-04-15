@@ -36,6 +36,7 @@ namespace MultiuserItemGrouper.Models
             this.ItemList = new List<Item>();
         }
 
+        // Use Context.Items has 
 
         //add Item
         public void addItem(Item item)
