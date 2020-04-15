@@ -80,7 +80,6 @@ namespace MultiuserItemGrouper.Models
                 {
                     Itemlist.Add(items);
                 }
-
             }
 
             string json = JsonConvert.SerializeObject(ItemList, Formatting.None);
@@ -97,7 +96,6 @@ namespace MultiuserItemGrouper.Models
                 {
                     Itemlist.Add(items);
                 }
-
             }
 
             string json = JsonConvert.SerializeObject(ItemList, Formatting.None);
