@@ -24,7 +24,7 @@ namespace MultiuserItemGrouper.Models
             GroupIDs.Add(group.GroupID);
         }
         //add group overload
-        public static void AddGroup(string name, User user)
+        public static void AddGroup(string name, string user)
         {
             int maxID = 0;
             foreach (int i in GroupIDs)
@@ -41,9 +41,9 @@ namespace MultiuserItemGrouper.Models
         }
 
         //delete group
-        public static void DeleteGroup(Group group, User user)
+        public static void DeleteGroup(Group group, string user)
         {
-            if (group.Owner == user)
+            if (group.OwnerName == user)
             {
                 AllGroups.Remove(group);
             }
@@ -143,19 +143,14 @@ namespace MultiuserItemGrouper.Models
 
         public static  User getUser(string username)
         {
-            int maxID = 0;
             foreach (User user in Users)
             {
                 if(user.Name == username)
                 {
                     return user;
                 }
-                if(user.Id >= maxID)
-                {
-                    maxID = user.Id + 1;
-                }
             }
-            User newUser = new User(username, maxID);
+            User newUser = new User(username);
             Users.Add(newUser);
             return newUser;
         }

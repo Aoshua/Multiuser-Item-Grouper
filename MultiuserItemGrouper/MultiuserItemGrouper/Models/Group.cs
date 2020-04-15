@@ -12,7 +12,7 @@ namespace MultiuserItemGrouper.Models
         
         public int GroupID { get; set; }//group ID
         public string GroupName { get; set; }//holds group name
-        public User Owner { get; set; }//owner
+        public string OwnerName { get; set; }//owner
         public List<Item> ItemList { get; set; }//list of item object
 
         public Group()
@@ -23,16 +23,16 @@ namespace MultiuserItemGrouper.Models
         {
             this.GroupID = group.GroupID;
             this.GroupName = group.GroupName;
-            this.Owner = group.Owner;
+            this.OwnerName = group.OwnerName;
             this.ItemList = group.ItemList;
         }
         
         //create group overload
-        public void createGroup(int ID, string name, User owner)
+        public void createGroup(int id, string groupName, string ownerName)
         {
-            this.GroupID = ID;
-            this.GroupName = name;
-            this.Owner = owner;
+            this.GroupID = id;
+            this.GroupName = groupName;
+            this.OwnerName = ownerName;
             this.ItemList = new List<Item>();
         }
 
@@ -76,7 +76,7 @@ namespace MultiuserItemGrouper.Models
             List<Item> Itemlist = new List<Item>();
             foreach (Item items in ItemList)
             {
-                if(items.IsHidden == false || items.IsHidden == true && items.UserID == user.Id)
+                if(items.IsHidden == false || items.IsHidden == true)
                 {
                     Itemlist.Add(items);
                 }
