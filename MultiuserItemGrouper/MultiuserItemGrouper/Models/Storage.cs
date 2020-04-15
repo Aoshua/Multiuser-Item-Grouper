@@ -6,25 +6,25 @@ using Newtonsoft.Json;
 
 namespace MultiuserItemGrouper.Models
 {
-    public class Storage
+    public static class Storage
     {
         //private list holding the objects of groups.
-        private List<Group> AllGroups { get; set; }//holds all the groups
-        private List<int> GroupIDs { get; set; }//keeps track of all the group ID's
+        private static List<Group> AllGroups { get; set; }//holds all the groups
+        private static List<int> GroupIDs { get; set; }//keeps track of all the group ID's
 
-        private List<User> AllUsers { get; set; }
+        private static List<User> AllUsers { get; set; }
 
 
         //update group <- don't see use in this List
 
         //add group
-        public void AddGroup(Group group)
+        public static void AddGroup(Group group)
         {
             AllGroups.Add(group);
             GroupIDs.Add(group.GroupID);
         }
         //add group overload
-        public void AddGroup(string name, User user)
+        public static void AddGroup(string name, User user)
         {
             int maxID = 0;
             foreach (int i in GroupIDs)
@@ -41,7 +41,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //delete group
-        public void DeleteGroup(Group group, User user)
+        public static void DeleteGroup(Group group, User user)
         {
             if (group.Owner == user)
             {
@@ -50,13 +50,13 @@ namespace MultiuserItemGrouper.Models
         }
 
         //return group's
-        public string GetGroups()
+        public static string GetGroups()
         {
             string json = JsonConvert.SerializeObject(AllGroups, Formatting.None);
             return json;
         }
         //return group's names
-        public string GetGroupNames()
+        public static string GetGroupNames()
         {
             List<string> names = new List<string>();
             foreach (Group group in AllGroups)
@@ -68,7 +68,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //add item
-        public void AddItemToGroup(Item item)
+        public static void AddItemToGroup(Item item)
         {
             foreach (Group groups in AllGroups)
             {
@@ -80,7 +80,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //remove item
-        public void RemoveItemFromGroup(Item item)
+        public static void RemoveItemFromGroup(Item item)
         {
             foreach (Group groups in AllGroups)
             {
@@ -92,7 +92,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //edit item
-        public void EditItemInGroup(Item item)
+        public static void EditItemInGroup(Item item)
         {
             foreach (Group groups in AllGroups)
             {
@@ -104,7 +104,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //return items
-        public string ReturnItemsInGroup(Group group, User user)
+        public static string ReturnItemsInGroup(Group group, User user)
         {
             foreach(Group groups in AllGroups)
             {
@@ -117,7 +117,7 @@ namespace MultiuserItemGrouper.Models
         }
 
         //return items overload
-        public string ReturnItemsInGroup(int groupID, User user)
+        public static string ReturnItemsInGroup(int groupID, User user)
         {
             foreach (Group groups in AllGroups)
             {
@@ -129,7 +129,7 @@ namespace MultiuserItemGrouper.Models
             return "";
         }
         //return items overload
-        public string ReturnItemsInGroup(int groupID, int UserID)
+        public static string ReturnItemsInGroup(int groupID, int UserID)
         {
             foreach (Group groups in AllGroups)
             {
@@ -141,7 +141,7 @@ namespace MultiuserItemGrouper.Models
             return "";
         }
 
-        public User getUser(string username)
+        public static  User getUser(string username)
         {
             int maxID = 0;
             foreach (User user in AllUsers)
