@@ -2,106 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace MultiuserItemGrouper.Models
 {
-    
     public class Group
     {//object for the group
-        
-        public int GroupID { get; set; }//group ID
-        public string GroupName { get; set; }//holds group name
-        public User Owner { get; set; }//owner
-        public List<Item> ItemList { get; set; }//list of item object
+        private int GroupID { get; set; }//group ID
+        private string GroupName { get; set; }//holds group name
+        private User Owner { get; set; }//owner
+        private List<Item> ItemList { get; set; }//list of item object
 
-        public Group()
-        {
-        }
         //create group
-        public void createGroup(Group group)
+        public Group(Group group)
         {
             this.GroupID = group.GroupID;
             this.GroupName = group.GroupName;
             this.Owner = group.Owner;
             this.ItemList = group.ItemList;
         }
-        
-        //create group overload
-        public void createGroup(int ID, string name, User owner)
-        {
-            this.GroupID = ID;
-            this.GroupName = name;
-            this.Owner = owner;
-            this.ItemList = new List<Item>();
-        }
 
+        //update group
 
-        //add Item
-        public void addItem(Item item)
-        {
-            this.ItemList.Add(item);
-        }
+        //return group's
 
-        //delete Item
-        public void deleteItem(Item item)
-        {
-
-            if (this.ItemList.Contains(item))
-            {
-                ItemList.Remove(item);
-            }
-            
-        }
-        
-        //editItem
-        public void editItem(Item item)
-        {
-            ItemList.Remove(new Item()
-            {
-                ItemID = item.ItemID,
-                GroupID = item.GroupID,
-                IsHidden = item.IsHidden,
-                IsLocked = item.IsLocked,
-                ItemName = item.ItemName,
-                ItemText = item.ItemText,
-                UserID = item.UserID
-            });
-            ItemList.Add(item);
-        }
-        
-        //getItemlist
-        public string returnItems(User user)
-        {
-            List<Item> Itemlist = new List<Item>();
-            foreach (Item items in ItemList)
-            {
-                if(items.IsHidden == false || items.IsHidden == true && items.UserID == user.Id)
-                {
-                    Itemlist.Add(items);
-                }
-
-            }
-
-            string json = JsonConvert.SerializeObject(ItemList, Formatting.None);
-            return json;
-        }
-
-        //getItemlist overload
-        public string returnItems(int user)
-        {
-            List<Item> Itemlist = new List<Item>();
-            foreach (Item items in ItemList)
-            {
-                if (items.IsHidden == false || items.IsHidden == true && items.UserID == user)
-                {
-                    Itemlist.Add(items);
-                }
-
-            }
-
-            string json = JsonConvert.SerializeObject(ItemList, Formatting.None);
-            return json;
-        }
+        //delete group
     }
 }
