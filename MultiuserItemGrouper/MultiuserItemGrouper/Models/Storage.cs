@@ -12,7 +12,7 @@ namespace MultiuserItemGrouper.Models
         private static List<Group> AllGroups { get; set; }//holds all the groups
         private static List<int> GroupIDs { get; set; }//keeps track of all the group ID's
 
-        private static List<User> AllUsers { get; set; }
+        public static List<User> Users { get; set; }
 
 
         //update group <- don't see use in this List
@@ -144,7 +144,7 @@ namespace MultiuserItemGrouper.Models
         public static  User getUser(string username)
         {
             int maxID = 0;
-            foreach (User user in AllUsers)
+            foreach (User user in Users)
             {
                 if(user.Name == username)
                 {
@@ -156,7 +156,7 @@ namespace MultiuserItemGrouper.Models
                 }
             }
             User newUser = new User(username, maxID);
-            AllUsers.Add(newUser);
+            Users.Add(newUser);
             return newUser;
         }
     }
