@@ -69,3 +69,26 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Custom Button styles
+-------------------------------------------------- */
+.btn-container {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 17px;
+}
+
+.btn-add {
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+    background-color: #00CC6F;
+}
+
+.btn-add:hover {
+    background-color: #009954;
+}
