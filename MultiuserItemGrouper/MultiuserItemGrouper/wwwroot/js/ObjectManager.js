@@ -1,65 +1,36 @@
-﻿var groups;
-var group;
+﻿var allGroups;
+var selectedGroup;
 var groupItems;
+var username;
 
 function receiveGroups(jString) {
-    groups = JSON.parse(jString);
+    allGroups = JSON.parse(jString);
 }
 
 function selectGroup() {
-
+    selectedGroup = $("#cboGroup").val()
+    console.log("Selected group: " + selectedGroup);
 }
 
 function receiveGroupItems() {
 
 }
 
-$(function () {
-    var hardGroups = {
-        "Name": "groups",
-        "Items": [
-            {
-                "Name": "group1",
-                "Items": [
-                    {
-                        "Name": "item1",
-                        "Body": "some text about item1",
-                        "IsLocked": true,
-                        "IsHidden": false
-                    },
-                    {
-                        "Name": "item2",
-                        "Body": "more text, this time about item2",
-                        "IsLocked": false,
-                        "IsHidden": true
-                    }
-                ]
-            },
-            {
-                "Name": "group2",
-                "Items": [
-                    {
-                        "Name": "item1",
-                        "Body": "some text about item1",
-                        "IsLocked": true,
-                        "IsHidden": false
-                    },
-                    {
-                        "Name": "item2",
-                        "Body": "more text, this time about item2",
-                        "IsLocked": false,
-                        "IsHidden": true
-                    }
-                ]
-            }
-        ]
-    };
-    var singleGroupString = JSON.stringify(singleGroup);
-    console.log(singleGroup);
-    console.log(singleGroupString);
-    receiveGroups(singleGroupString);
+// Retrieves the username from ViewBag:
+function setUser() {
+    username = $('#hidUser').val();
+}
 
-    for (var i = 0; i <= groups.length; i++) {
-        $('#cboGroup').append('<option value=' + groups[i] + '">' + groups[i] + '</option>');
+// Binds our list of group names to the group combo box:
+function bindGroupsCbo() {
+    allGroups = ["Fake Group A", "Fake Group B", "Fake Group C"]; // Hardcoding groups for now
+    for (var i = 0; i < allGroups.length; i++) {
+        $('#cboGroup').append($('<option></option>').attr("value", allGroups[i]).text(allGroups[i]));
     }
+}
+
+// Functions that are called on page load:
+$(function () {
+    setUser();
+    bindGroupsCbo();
 });
