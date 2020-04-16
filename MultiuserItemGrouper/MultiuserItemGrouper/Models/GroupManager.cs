@@ -36,13 +36,8 @@ namespace MultiuserItemGrouper.Models
         // Create Group, check that name has not already been used
         public static CreateGroupResult CreateGroup(string name)
         {
-            foreach (Group group in Groups)
-            {
-                if (name == group.Name)
-                {
-                    return CreateGroupResult.FAIL;
-                }
-            }
+            if (Groups.Where(g => g.Name == name).Any() == true)
+                return CreateGroupResult.FAIL;
 
             Groups.Add(new Group(name));
             return CreateGroupResult.SUCCESS;
@@ -86,7 +81,10 @@ namespace MultiuserItemGrouper.Models
         public static void UpdateItem(string user, string groupName, int itemId, 
             string itemName, string itemBody, bool hideItem)
         {
-            
+            Item i = FindGroupByName(groupName).Items.Where(i => i.Id == itemId).FirstOrDefault();
+            i.Name = itemName;
+            i.Body = itemBody;
+            i.IsHidden = hideItem;
         }
 
         // todo

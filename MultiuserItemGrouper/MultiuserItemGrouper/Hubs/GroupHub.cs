@@ -10,9 +10,28 @@ namespace MultiuserItemGrouper.Hubs
     public class GroupHub : Hub
     {
 
+        public async Task SetUsername(string name)
+        {
+            Context.Items.Add("username", name);
+        }
+
         public async Task GetGroupNames()
         {
             await Clients.Caller.SendAsync("ReturnGroupNames", GroupManager.GetGroupNames());
+        }
+
+        public async Task CreateGroup(string name)
+        {
+            switch (GroupManager.CreateGroup(name)) {
+                case GroupManager.CreateGroupResult.SUCCESS:
+                    await Clients.Caller.SendAsync("GroupCreated");
+                    break;
+                case GroupManager.CreateGroupResult.FAIL:
+                default:
+                    await SendErrorMsg(Clients.Caller, "Group not created.");
+                    break;
+            }
+            await Clients.Caller.SendAsync("GroupCreated");
         }
 
         public async Task GetItemsInGroup(string groupName)
@@ -62,9 +81,10 @@ namespace MultiuserItemGrouper.Hubs
 
         // todo: not sure this works, must find a way to pass in the client that
         // performed the illegal operation?
-        public async Task SendErrorMsg(string msg)
+        // todo: make this unavailable for clients to call, only other Hub methods
+        private async Task SendErrorMsg(IClientProxy caller, string msg)
         {
-            await Clients.Caller.SendAsync("ErrorMsg", msg);
+            await caller.SendAsync("ErrorMsg", msg);
         }
     }
 }
