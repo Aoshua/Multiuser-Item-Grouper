@@ -14,7 +14,12 @@ namespace MultiuserItemGrouper.Models
         public static List<User> Users { get; set; }
 
         //update group <- don't see use in this List
-
+        static Storage()
+        {
+            AllGroups = new List<Group>();
+            GroupIDs = new List<int>();
+            Users = new List<User>();
+        }
         //add group
         public static void AddGroup(Group group)
         {
