@@ -44,13 +44,16 @@ namespace MultiuserItemGrouper.Models
             // todo: proper implementation for a discardable group (class?)
             Group selectedGroup = new Group("discardable");
 
-            foreach (Group group in Groups)
+            /*foreach (Group group in Groups)
             {
                 if (name == group.Name)
                     selectedGroup = group;
             }
 
-            return selectedGroup;
+            return selectedGroup;*/
+
+            // This returns the first (and only in this case) group with the exact same name:
+            return Groups.Where(g => g.Name == name).FirstOrDefault(); 
         }
     }
 }
