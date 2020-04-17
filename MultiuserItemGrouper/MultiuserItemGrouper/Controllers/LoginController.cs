@@ -19,9 +19,7 @@ namespace MultiuserItemGrouper.Controllers
 
         public IActionResult LogUser(string txtUsername)
         {
-            // todo: add context item when user logs in
-            
-            return View();
+            return RedirectToAction("Index", "Home", new { @name = txtUsername });
         }
     }
 }

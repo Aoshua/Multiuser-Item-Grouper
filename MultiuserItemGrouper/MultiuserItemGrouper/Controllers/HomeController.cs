@@ -18,8 +18,9 @@ namespace MultiuserItemGrouper.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string name)
         {
+            ViewBag.Username = name;
             return View();
         }
 

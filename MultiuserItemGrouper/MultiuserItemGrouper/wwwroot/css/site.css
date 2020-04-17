@@ -51,6 +51,15 @@ button.accept-policy {
   line-height: inherit;
 }
 
+.pad-btm-10 {
+    padding-bottom: 10px;
+}
+
+.mar-btm-10 {
+    margin-bottom: 10px;
+}
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -87,6 +96,28 @@ body {
     padding-top: 5px;
     cursor: pointer;
     background-color: #00CC6F;
+}
+
+.btn-edit {
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
+    color: #F0D046;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.btn-delete {
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
+    color: firebrick;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+    background-color: #fff;
 }
 
 .btn-add:hover {
