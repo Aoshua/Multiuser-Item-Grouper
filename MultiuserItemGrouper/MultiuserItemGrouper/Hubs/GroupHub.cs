@@ -42,7 +42,8 @@ namespace MultiuserItemGrouper.Hubs
             await Clients.Caller.SendAsync("ReturnItemsInGroup", msg, data);
         }
 
-        public async Task AddItem(string groupName, string itemName, string itemBody)
+        //todo : ishidden attr
+        public async Task AddItem(string groupName, string itemName, string itemBody, bool IsHidden)
         {
             GroupManager.AddItem(Context.Items["username"].ToString(), groupName, itemName, itemBody);
             await Clients.All.SendAsync("InEditedGroup", groupName);
@@ -72,11 +73,6 @@ namespace MultiuserItemGrouper.Hubs
         {
             GroupManager.DeleteItem(Context.Items["username"].ToString(), groupName, itemId);
             await Clients.All.SendAsync("InEditedGroup", groupName);
-        }
-
-        public async Task IsInEditedGroup(string groupName)
-        {
-            await GetItemsInGroup(groupName);
         }
 
         // todo: not sure this works, must find a way to pass in the client that

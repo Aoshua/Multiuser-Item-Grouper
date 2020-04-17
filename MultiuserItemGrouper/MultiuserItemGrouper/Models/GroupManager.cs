@@ -84,7 +84,7 @@ namespace MultiuserItemGrouper.Models
             Item i = FindGroupByName(groupName).Items.Where(i => i.Id == itemId).FirstOrDefault();
             i.Name = itemName;
             i.Body = itemBody;
-            i.IsHidden = hideItem;
+            i.IsHidden = (user == i.Owner) ? hideItem : i.IsHidden;
         }
 
         // todo

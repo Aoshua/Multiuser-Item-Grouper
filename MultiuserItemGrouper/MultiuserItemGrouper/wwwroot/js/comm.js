@@ -10,17 +10,30 @@ connection.on("ReceiveMessage", function (user, message) {
     document.getElementById("messagesList").appendChild(li);
 });
 
-connection.start().then(function () {
-    document.getElementById("sendButton").disabled = false;
-}).catch(function (err) {
-    return console.error(err.toString());
-});
+// Server: ReturnGroupNames
 
-document.getElementById("sendButton").addEventListener("click", function (event) {
-    var user = document.getElementById("userInput").value;
-    var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", user, message).catch(function (err) {
-        return console.error(err.toString());
-    });
-    event.preventDefault();
-});
+// Server: GroupCreated
+
+// Server: ReturnItemsInGroup
+
+// Server: InEditedGroup
+
+// Server: ErrorMsg
+
+// Client: SetUsername
+
+// Client: GetGroupNames
+
+// Client: GetItemsInGroup
+
+// Client: AddItem
+
+// Client: LockItem
+
+// Client: UnlockItem
+
+// Client: UpdateItem
+
+// Client: DeleteItem
+
+// Client: IsInEditedGroup
