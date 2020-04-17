@@ -6,101 +6,60 @@ using Newtonsoft.Json;
 
 namespace MultiuserItemGrouper.Models
 {
-    
     public class Group
-    {//object for the group
-        
-        public int GroupID { get; set; }//group ID
-        public string GroupName { get; set; }//holds group name
-        public string OwnerName { get; set; }//owner
-        public List<Item> ItemList { get; set; }//list of item object
+    {
+        public string Name { get; set; }
+        public List<Item> Items { get; set; }
 
-        public Group()
+        public Group(string name)
         {
-        }
-        //create group
-        public void createGroup(Group group)
-        {
-            this.GroupID = group.GroupID;
-            this.GroupName = group.GroupName;
-            this.OwnerName = group.OwnerName;
-            this.ItemList = group.ItemList;
+            this.Name = name;
+            this.Items = new List<Item>();
         }
         
-        //create group overload
-        public void createGroup(int id, string groupName, string ownerName)
-        {
-            this.GroupID = id;
-            this.GroupName = groupName;
-            this.OwnerName = ownerName;
-            this.ItemList = new List<Item>();
-        }
-
-        // Use Context.Items has 
-
-        //add Item
-        public void addItem(Item item)
-        {
-            this.ItemList.Add(item);
-        }
-
-        //delete Item
-        public void deleteItem(Item item)
-        {
-
-            if (this.ItemList.Contains(item))
-            {
-                ItemList.Remove(item);
-            }
-            
-        }
-        
-        //editItem
-        public void editItem(Item item)
-        {
-            ItemList.Remove(new Item()
-            {
-                ItemID = item.ItemID,
-                GroupID = item.GroupID,
-                IsHidden = item.IsHidden,
-                IsLocked = item.IsLocked,
-                ItemName = item.ItemName,
-                ItemText = item.ItemText,
-                UserID = item.UserID
-            });
-            ItemList.Add(item);
-        }
-        
-        //getItemlist
+        // todo return serialized group
         public string returnItems(string user)
         {
-            List<Item> Itemlist = new List<Item>();
-            foreach (Item items in ItemList)
-            {
-                if(items.IsHidden == false || items.IsHidden == true)
-                {
-                    Itemlist.Add(items);
-                }
-            }
-
-            string json = JsonConvert.SerializeObject(ItemList, Formatting.None);
-            return json;
+            return "";
         }
 
-        //getItemlist overload
-        public string returnItems(int user)
+        public SerializableGroup SerializeGroupForUser(string user)
         {
-            List<Item> Itemlist = new List<Item>();
-            foreach (Item items in ItemList)
+            SerializableGroup sg = new SerializableGroup();
+            sg.Name = this.Name;
+
+            foreach (Item item in Items)
             {
-                if (items.IsHidden == false || items.IsHidden == true && items.UserID == user)
+                SerializableItem si = item.ConvertToSerializableItem();
+
+                // Unlock the item in display if the user is the owner.
+                if (user == item.Owner)
                 {
-                    Itemlist.Add(items);
+                    si.IsLocked = false;
+                }
+
+                // Do not show the item if the item is hidden and the user
+                // is not the owner.
+                if (item.IsHidden)
+                {
+                    if (user == item.Owner)
+                    {
+                        sg.Items.Add(si);
+                    }
+                }
+                else
+                {
+                    sg.Items.Add(si);
                 }
             }
 
-            string json = JsonConvert.SerializeObject(ItemList, Formatting.None);
-            return json;
+            return sg;
         }
+    }
+
+    public struct SerializableGroup
+    {
+        public string Name;
+        public List<SerializableItem> Items;
     }
 }

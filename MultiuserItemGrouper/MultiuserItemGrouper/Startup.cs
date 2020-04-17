@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MultiuserItemGrouper.Hubs;
 
 namespace MultiuserItemGrouper
 {
@@ -24,6 +25,7 @@ namespace MultiuserItemGrouper
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +50,7 @@ namespace MultiuserItemGrouper
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<GroupHub>("/grouphub");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}/{id?}");
