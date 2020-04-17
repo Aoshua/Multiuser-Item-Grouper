@@ -3,20 +3,21 @@ var allGroups;
 var selectedGroup;
 var groupItems;
 var username;
+var isEditing;
 
 // Functions that are called on page load:
 $(function () {
     setUser();
     bindGroupsCbo();
     receiveItems(); // Only calling here for testing
-    drawItems();
 });
 
 // These two functions might just be in comm.js
-function receiveGroups(jString) {
+function setGroups(jString) {
     allGroups = JSON.parse(jString);
+    bindGroupsCbo();
 }
-function receiveItems() {
+function receiveItems(jString) {
     groupItems = {
         "Name": "group1",
         "Items": [
@@ -40,6 +41,11 @@ function receiveItems() {
             }
         ]
     }; // Hardcoding items for now
+    drawItems();
+}
+
+function addItem() {
+
 }
 
 function editItem(itemName) {
@@ -54,6 +60,10 @@ function deleteItem(itemName) {
 
 function addGroup() {
     console.log("Add group");
+}
+
+function alertError() {
+
 }
 
 // Sets our selected group
