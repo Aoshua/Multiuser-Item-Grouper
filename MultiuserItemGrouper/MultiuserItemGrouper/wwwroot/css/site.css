@@ -109,6 +109,17 @@ body {
     background-color: #fff;
 }
 
+.btn-delete {
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
+    color: firebrick;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
 .btn-add:hover {
     background-color: #009954;
 }

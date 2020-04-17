@@ -9,13 +9,13 @@
         <h1 class="display-4" style="font-size: 3rem;">Grouper</h1>
     </div>
     <div class="row" style="padding-bottom: 20px;">
-        <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="col-lg-4 col-md-6 col-sm-11" style="padding: 0px;">
             <div class="form-group">
                 <label for="cboGroup">Select Group:</label>
                 <select class="form-control" id="cboGroup" onchange="selectGroup()"></select>
             </div>
         </div>
-        <div class="col-1 btn-container" onclick="addGroup('group')">
+        <div class="col-lg-1 col-sm-1 btn-container" title="Add Group" onclick="addGroup()">
             <div class="btn-add">
                 <i class="fa fa-plus"></i>
             </div>
@@ -23,62 +23,7 @@
     </div>
     <div class="row">
         <div id="itemsContainer" style="width: 100%; height: 650px; border: 1px solid #ced4da; border-radius: 4px; padding: 10px;">
-            @*<div class="row">
-                <div class="col-sm-6">
-                    <div class="card mar-btm-10">
-                        <div class="card-body">
-                            <div class="btn-container" style="float: right;">
-                                <div class="btn-edit">
-                                    <i class="fa fa-pencil"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card mar-btm-10">
-                        <div class="card-body">
-                            <div class="btn-container" style="float: right;">
-                                <div class="btn-edit">
-                                    <i class="fa fa-pencil"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card mar-btm-10">
-                        <div class="card-body">
-                            <div class="btn-container" style="float: right;">
-                                <div class="btn-edit">
-                                    <i class="fa fa-pencil"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card mar-btm-10">
-                        <div class="card-body">
-                            <div class="btn-container" style="float: right;">
-                                <div class="btn-edit">
-                                    <i class="fa fa-pencil"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+            @* Items are loaded here *@
         </div>
     </div>
 </div>

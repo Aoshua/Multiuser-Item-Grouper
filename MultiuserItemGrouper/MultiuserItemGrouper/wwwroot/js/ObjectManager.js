@@ -46,12 +46,14 @@ function editItem(itemName) {
     console.log("Edit item: " + itemName);
 }
 
-function deleteItem() {
-
+function deleteItem(itemName) {
+    if (confirm(`Are you sure you want to delete "${itemName}"?`)) {
+        console.log("Delete item: " + itemName);
+    }
 }
 
-function addGroup(groupName) {
-    console.log("Add group: " + groupName);
+function addGroup() {
+    console.log("Add group");
 }
 
 // Sets our selected group
@@ -81,10 +83,24 @@ function drawItems() {
                 cont.append("<div class='row'></div>");
                 cont = $('#itemsContainer > div');
             }
-            cont.append("<div class='col-sm-6'><div class= 'card mar-btm-10' >" +
-                "<div class='card-body'><div class='btn-container' style='float: right;' onclick='editItem('" + groupItems.Items[i].Name + "')'><div class='btn-edit'><i class='fa fa-pencil'></i></div></div><h5 class='card-title'>" +
-                groupItems.Items[i].Name + "</h5><p class='card-text'>" +
-                groupItems.Items[i].Body + "</p></div></div></div>");
+            cont.append(`<div class='col-sm-6'>
+                            <div class= 'card mar-btm-10' >
+                                <div class='card-body'>
+                                    <div class='btn-container' title='Delete Item' style='float: right;' onclick='deleteItem("${groupItems.Items[i].Name}")'>
+                                        <div class='btn-delete'>
+                                            <i class='fa fa-times'></i>
+                                        </div>
+                                    </div>
+                                    <div class='btn-container' title='Edit Item' style='float: right;' onclick='editItem("${groupItems.Items[i].Name}")'>
+                                        <div class='btn-edit'>
+                                            <i class='fa fa-pencil'></i>
+                                        </div>
+                                    </div>
+                                    <h5 class='card-title'>${groupItems.Items[i].Name}</h5>
+                                    <p class='card-text'>${groupItems.Items[i].Body}</p>
+                                </div>
+                            </div>
+                        </div>`);
         }
     }
 }
