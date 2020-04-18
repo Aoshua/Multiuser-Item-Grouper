@@ -14,12 +14,10 @@ var isEditing;
 // Page load function:
 $(function () {
     setUser();
-    bindGroupsCbo();
-    receiveItems(); // Called here for Testing 
+    requestGroups();
 });
 // Binds our list of group names to the group combo box:
-function bindGroupsCbo() {
-    allGroups = ["Fake Group A", "Fake Group B", "Fake Group C"]; // Hardcoding groups for now
+function bindGroupsCbo() {     
     for (var i = 0; i < allGroups.length; i++) {
         $('#cboGroup').append($('<option></option>').attr("value", allGroups[i]).text(allGroups[i]));
     }
@@ -109,16 +107,63 @@ function receiveGroups(jGroups) {
 }
 // Receives items:
 function receiveItems(jGroupItems) {
-    groupItems = jGroupitems
+    groupItems = jGroupItems
     drawItems();
 }
 // Request groups:
 function requestGroups() {
-    allGroups = GetGroupNames();
+    //allGroups = GetGroupNames(); 
+    allGroups = {
+        "names": [
+            "group1",
+            "group2",
+            "group3"
+        ]
+    };
     bindGroupsCbo();
 }
 // Request items:
 function requestItems(selectedGroup) {
-    groupItems = GetItemsInGroup(selectedGroup)
+    //groupItems = GetItemsInGroup(selectedGroup)
+    groupItems = {
+        "name": "picnicGroup",
+        "items": [
+            {
+                "id": 2,
+                "name": "basket",
+                "body": "A nice, woven basket.",
+                "isLocked": false,
+                "isHidden": false
+            },
+            {
+                "id": 3,
+                "name": "ugly basket",
+                "body": "A cheap basket we got on Craigslist.",
+                "isLocked": false,
+                "isHidden": true
+            },
+            {
+                "id": 5,
+                "name": "grapes",
+                "body": "Delicious, imported red grapes.",
+                "isLocked": true,
+                "isHidden": false
+            },
+            {
+                "id": 15,
+                "name": "bleu cheese",
+                "body": "Josh's favorite Floridian bleu cheese.",
+                "isLocked": false,
+                "isHidden": false
+            },
+            {
+                "id": 7000,
+                "name": "candy",
+                "body": "Tanner's favorite Reese's Pieces.",
+                "isLocked": true,
+                "isHidden": true
+            }
+        ]
+    };
     drawItems();
 }
