@@ -18,15 +18,15 @@ $(function () {
 });
 // Binds our list of group names to the group combo box:
 function bindGroupsCbo() {     
-    for (var i = 0; i < allGroups.length; i++) {
-        $('#cboGroup').append($('<option></option>').attr("value", allGroups[i]).text(allGroups[i]));
+    for (var i = 0; i < allGroups.names.length; i++) {
+        $('#cboGroup').append($('<option></option>').attr("value", allGroups.names[i]).text(allGroups.names[i]));
     }
 }
 // Dynamically draws our items
 function drawItems() {
     var cont = $('#itemsContainer');
-    if (groupItems.Items.length > 0) {
-        for (var i = 0; i < groupItems.Items.length; i++) {
+    if (groupItems.items.length > 0) {
+        for (var i = 0; i < groupItems.items.length; i++) {
             if (i % 2 == 0) { // Add a new row if we have an even number (0 based)
                 cont.append("<div class='row'></div>");
                 cont = $('#itemsContainer > div');
@@ -34,18 +34,18 @@ function drawItems() {
             cont.append(`<div class='col-sm-6'>
                             <div class= 'card mar-btm-10' >
                                 <div class='card-body'>
-                                    <div class='btn-container' title='Delete Item' style='float: right;' onclick='deleteItem("${groupItems.Items[i].Name}")'>
+                                    <div class='btn-container' title='Delete Item' style='float: right;' onclick='deleteItem("${groupItems.items[i].name}")'>
                                         <div class='btn-delete'>
                                             <i class='fa fa-times'></i>
                                         </div>
                                     </div>
-                                    <div class='btn-container' title='Edit Item' style='float: right;' onclick='editItem("${groupItems.Items[i].Name}")'>
+                                    <div class='btn-container' title='Edit Item' style='float: right;' onclick='editItem("${groupItems.items[i].name}")'>
                                         <div class='btn-edit'>
                                             <i class='fa fa-pencil'></i>
                                         </div>
                                     </div>
-                                    <h5 class='card-title'>${groupItems.Items[i].Name}</h5>
-                                    <p class='card-text'>${groupItems.Items[i].Body}</p>
+                                    <h5 class='card-title'>${groupItems.items[i].name}</h5>
+                                    <p class='card-text'>${groupItems.items[i].body}</p>
                                 </div>
                             </div>
                         </div>`);
@@ -91,14 +91,15 @@ function deleteItem(itemName) {
 
 // Sets our selected group:
 function selectGroup() {
-    selectedGroup = $("#cboGroup").val()
+    selectedGroup = $("#cboGroup").val();
+    console.log(selectedGroup);
     requestItems(selectedGroup);
     //send selected group to comm.js?
 }
 // Sends user to comm.js
 function setUser() {
     username = $('#hidUser').val();
-    SetUsername(username);
+    //SetUsername(username);
 }
 // Receives groups:
 function receiveGroups(jGroups) {
