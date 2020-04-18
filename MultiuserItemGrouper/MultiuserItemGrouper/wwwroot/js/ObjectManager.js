@@ -21,10 +21,16 @@ function bindGroupsCbo() {
     for (var i = 0; i < allGroups.names.length; i++) {
         $('#cboGroup').append($('<option></option>').attr("value", allGroups.names[i]).text(allGroups.names[i]));
     }
+    // For intial load:
+    if (allGroups.names.length > 0) {
+        selectedGroup = allGroups.names[0];
+        requestItems(selectedGroup);
+    }
 }
 // Dynamically draws our items
 function drawItems() {
     var cont = $('#itemsContainer');
+    cont.empty(); // Clear out old items
     if (groupItems.items.length > 0) {
         for (var i = 0; i < groupItems.items.length; i++) {
             if (i % 2 == 0) { // Add a new row if we have an even number (0 based)
@@ -85,7 +91,7 @@ function showEditItem(itemId, itemName, itemBody, itemHidden) {
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="itemModalTitle">Add Item</h5>
+                        <h5 class="modal-title" id="itemModalTitle">Edit Item</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -127,7 +133,7 @@ function editItem(itemId) {
     //UnlockItem(selectedGroup, itemId);
 }
 function deleteItem(itemId) {
-    if (confirm(`Are you sure you want to delete "${itemId}"?`)) {
+    if (confirm("Are you sure you want to delete this item?")) {
         //DeleteItem(selectedGroup, itemId);
     }
 }
