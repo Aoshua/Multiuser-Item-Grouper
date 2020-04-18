@@ -5,77 +5,18 @@ var groupItems;
 var username;
 var isEditing;
 
-// Functions that are called on page load:
+
+
+/*======================
+ * Functions to Draw UI:
+ *=====================*/
+
+// Page load function:
 $(function () {
     setUser();
     bindGroupsCbo();
-    receiveItems(); // Only calling here for testing
+    receiveItems(); // Called here for Testing 
 });
-
-// These two functions might just be in comm.js
-function setGroups(jString) {
-    allGroups = JSON.parse(jString);
-    bindGroupsCbo();
-}
-function receiveItems(jString) {
-    groupItems = {
-        "Name": "group1",
-        "Items": [
-            {
-                "Name": "item1",
-                "Body": "Let's pretend that this card really has a lot of text. It was really rainy this morning. I got a lot done today. Work was fun. This thing seems to work so that is nice.",
-                "IsLocked": true,
-                "IsHidden": false
-            },
-            {
-                "Name": "item2",
-                "Body": "more text, this time about item2",
-                "IsLocked": false,
-                "IsHidden": true
-            },
-            {
-                "Name": "Item 3",
-                "Body": "If this goes to next next row, I will be so happy",
-                "IsLocked": false,
-                "IsHidden": true
-            }
-        ]
-    }; // Hardcoding items for now
-    drawItems();
-}
-
-function addItem() {
-
-}
-
-function editItem(itemName) {
-    console.log("Edit item: " + itemName);
-}
-
-function deleteItem(itemName) {
-    if (confirm(`Are you sure you want to delete "${itemName}"?`)) {
-        console.log("Delete item: " + itemName);
-    }
-}
-
-function addGroup() {
-    console.log("Add group");
-}
-
-function alertError() {
-
-}
-
-// Sets our selected group
-function selectGroup() {
-    selectedGroup = $("#cboGroup").val()
-}
-
-// Retrieves the username from ViewBag:
-function setUser() {
-    username = $('#hidUser').val();
-}
-
 // Binds our list of group names to the group combo box:
 function bindGroupsCbo() {
     allGroups = ["Fake Group A", "Fake Group B", "Fake Group C"]; // Hardcoding groups for now
@@ -83,7 +24,6 @@ function bindGroupsCbo() {
         $('#cboGroup').append($('<option></option>').attr("value", allGroups[i]).text(allGroups[i]));
     }
 }
-
 // Dynamically draws our items
 function drawItems() {
     var cont = $('#itemsContainer');
@@ -113,4 +53,72 @@ function drawItems() {
                         </div>`);
         }
     }
+}
+
+
+
+/*========================
+ * CRUD Functions for  UI:
+ *=======================*/
+
+function showAddGroup() {
+
+}
+function addGroup() {
+    
+}
+function showAddItem() {
+
+}
+function addItem() {
+
+}
+function showEditItem(itemName) {
+
+}
+function editItem(itemName) {
+    
+}
+function deleteItem(itemName) {
+    if (confirm(`Are you sure you want to delete "${itemName}"?`)) {
+        console.log("Delete item: " + itemName);
+    }
+}
+
+
+
+/*===============================================
+ * Functions to Receive and Request from comm.js:
+ *==============================================*/
+
+// Sets our selected group:
+function selectGroup() {
+    selectedGroup = $("#cboGroup").val()
+    requestItems(selectedGroup);
+    //send selected group to comm.js?
+}
+// Sends user to comm.js
+function setUser() {
+    username = $('#hidUser').val();
+    SetUsername(username);
+}
+// Receives groups:
+function receiveGroups(jGroups) {
+    allGroups = JSON.parse(jGroups);
+    bindGroupsCbo();
+}
+// Receives items:
+function receiveItems(jGroupItems) {
+    groupItems = jGroupitems
+    drawItems();
+}
+// Request groups:
+function requestGroups() {
+    allGroups = GetGroupNames();
+    bindGroupsCbo();
+}
+// Request items:
+function requestItems(selectedGroup) {
+    groupItems = GetItemsInGroup(selectedGroup)
+    drawItems();
 }
