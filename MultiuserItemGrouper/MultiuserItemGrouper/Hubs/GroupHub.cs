@@ -24,22 +24,19 @@ namespace MultiuserItemGrouper.Hubs
         {
             switch (GroupManager.CreateGroup(name)) {
                 case GroupManager.CreateGroupResult.SUCCESS:
-                    await Clients.Caller.SendAsync("GroupCreated");
+                    await Clients.Caller.SendAsync("GroupCreated", name);
                     break;
                 case GroupManager.CreateGroupResult.FAIL:
                 default:
-                    await SendErrorMsg(Clients.Caller, "Group not created.");
+                    await SendErrorMsg(Clients.Caller, "Group " + name + " not created.");
                     break;
             }
-            await Clients.Caller.SendAsync("GroupCreated");
         }
-
+        
         public async Task GetItemsInGroup(string groupName)
         {
-            string msg = "Return Items In Group";
             string data = GroupManager.SerializeGroupForUser(groupName, Context.Items["username"].ToString());
-
-            await Clients.Caller.SendAsync("ReturnItemsInGroup", msg, data);
+            await Clients.Caller.SendAsync("ReturnItemsInGroup", data);
         }
 
         //todo : ishidden attr
@@ -61,10 +58,10 @@ namespace MultiuserItemGrouper.Hubs
             await Clients.All.SendAsync("InEditedGroup", groupName);
         }
 
-        public async Task UpdateItem(string groupName, int itemId, string itemName, string itemBody, bool hideItem)
+        public async Task UpdateItem(string groupName, int itemId, string itemName, string itemBody, bool isHidden)
         {
             GroupManager.UpdateItem(Context.Items["username"].ToString(),
-                groupName, itemId, itemName, itemBody, hideItem);
+                groupName, itemId, itemName, itemBody, isHidden);
 
             await Clients.All.SendAsync("InEditedGroup", groupName);
         }

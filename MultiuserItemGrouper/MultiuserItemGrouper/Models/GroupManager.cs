@@ -79,12 +79,12 @@ namespace MultiuserItemGrouper.Models
         // todo maybe add owner permissions? skipping for now
         // Update Item in Group
         public static void UpdateItem(string user, string groupName, int itemId, 
-            string itemName, string itemBody, bool hideItem)
+            string itemName, string itemBody, bool isHidden)
         {
             Item i = FindGroupByName(groupName).Items.Where(i => i.Id == itemId).FirstOrDefault();
             i.Name = itemName;
             i.Body = itemBody;
-            i.IsHidden = (user == i.Owner) ? hideItem : i.IsHidden;
+            i.IsHidden = (user == i.Owner) ? isHidden : i.IsHidden;
         }
 
         // todo
