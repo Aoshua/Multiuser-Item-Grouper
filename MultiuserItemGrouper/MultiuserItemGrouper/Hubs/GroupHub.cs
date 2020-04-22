@@ -17,7 +17,7 @@ namespace MultiuserItemGrouper.Hubs
 
         public async Task GetGroupNames()
         {
-            await Clients.Caller.SendAsync("ReturnGroupNames", GroupManager.GetGroupNames());
+            await Clients.All.SendAsync("ReturnGroupNames", GroupManager.GetGroupNames());
         }
 
         public async Task CreateGroup(string name)

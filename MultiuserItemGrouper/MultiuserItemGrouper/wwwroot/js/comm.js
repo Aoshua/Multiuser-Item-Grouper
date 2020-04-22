@@ -11,8 +11,8 @@ connection.on("ReturnGroupNames", function (groupNames) {
 // Server: GroupCreated
 connection.on("GroupCreated", function (groupName) {
     console.log("Server: GroupCreated, " + groupName);
-    selectedGroup = groupName; // set global, not sure if we need to do anything else?
     GetItemsInGroup(groupName); // call to server to get items list
+    setActiveGroup(groupName);
 });
 
 // Server: ReturnItemsInGroup
@@ -25,7 +25,9 @@ connection.on("ReturnItemsInGroup", function (data) {
 connection.on("InEditedGroup", function (groupName) {
     console.log("Server: InEditedGroup, " + groupName);
     // todo: check if currently editing an item
-    GetItemsInGroup(groupName);
+    if (selectedGroup == groupName) {
+        GetItemsInGroup(groupName);
+    } // else do nothing
 })
 
 // Server: ErrorMsg
@@ -38,6 +40,7 @@ connection.on("ErrorMsg", function (msg) {
 connection.start().then(function () {
     console.log("Connection init.");
     SetUsername(username);
+    GetGroupNames();
 }).catch(function (err) {
     return console.error(err.toString());
 });

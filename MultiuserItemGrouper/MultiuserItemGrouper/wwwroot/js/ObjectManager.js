@@ -26,11 +26,19 @@ function bindGroupsCbo() {
         $('#cboGroup').append($('<option></option>').attr("value", group).text(group));
     }
 
-    // For intial load:
-    if (allGroups.names.length > 0) {
-        selectedGroup = allGroups.names[0];
-        requestItems(selectedGroup);
+    if (typeof selectedGroup == 'undefined') {
+        selectedGroup = allGroups[0];
+        GetItemsInGroup(selectedGroup);
     }
+
+    console.log("bindCbo: sg " + selectedGroup);
+    $(`#cboGroup option[value=${selectedGroup}`).prop('selected', true);
+}
+
+function setActiveGroup(groupName) {
+    selectedGroup = groupName;
+    console.log("setActiveGroup: sg " + selectedGroup);
+    $(`#cboGroup option[value=${selectedGroup}`).prop('selected', true);
 }
 
 // Dynamically draws our items
@@ -39,7 +47,7 @@ function drawItems() {
     var cont = $('#itemsContainer');
     cont.empty(); // Clear out old items
     console.log("GroupItems length: " + groupItems.Items.length);
-    if (groupItems.items.length > 0) {
+    if (groupItems.Items.length > 0) {
         for (var i = 0; i < groupItems.Items.length; i++) {
             if (i % 2 == 0) { // Add a new row if we have an even number (0 based)
                 cont.append("<div class='row'></div>");
@@ -50,7 +58,7 @@ function drawItems() {
                         <div class='col-sm-6'>
                             <div class= 'card mar-btm-10' >
                                 <div class='card-body'>
-                                    <div class='btn-container' title='Delete Item' style='float: right;' onclick='deleteItem("${groupItems.Items[i].Id}")'>
+                                    <div class='btn-container' title='Delete Item' style='float: right;' onclick='confirmDeleteItem("${groupItems.Items[i].Id}")'>
                                         <div class='btn-delete'>
                                             <i class='fa fa-times'></i>
                                         </div>
@@ -140,9 +148,10 @@ function editItem(itemId) {
     UpdateItem(selectedGroup, itemId, newItemName, newItemBody, newItemHidden);
     UnlockItem(selectedGroup, itemId);
 }
-function deleteItem(itemId) {
+
+function confirmDeleteItem(itemId) {
     if (confirm("Are you sure you want to delete this item?")) {
-        DeleteItem(selectedGroup, itemId);
+        DeleteItem(selectedGroup, parseInt(itemId));
     }
 }
 
