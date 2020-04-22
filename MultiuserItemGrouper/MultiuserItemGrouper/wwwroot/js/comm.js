@@ -5,13 +5,14 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/grouphub").build()
 // Server: ReturnGroupNames
 connection.on("ReturnGroupNames", function (groupNames) {
     console.log("Server: ReturnGroupNames");
-    setGroups(groupNames);
+    receiveGroups(groupNames);
 });
 
 // Server: GroupCreated
 connection.on("GroupCreated", function (groupName) {
     console.log("Server: GroupCreated, " + groupName);
-    setGroup(groupName);
+    selectedGroup = groupName; // set global, not sure if we need to do anything else?
+    GetItemsInGroup(groupName); // call to server to get items list
 });
 
 // Server: ReturnItemsInGroup
@@ -31,6 +32,14 @@ connection.on("InEditedGroup", function (groupName) {
 connection.on("ErrorMsg", function (msg) {
     console.log("Server: ErrorMsg, " + msg);
     alertError(msg);
+});
+
+// Start the connection
+connection.start().then(function () {
+    console.log("Connection init.");
+    SetUsername(username);
+}).catch(function (err) {
+    return console.error(err.toString());
 });
 
 // Client: SetUsername
@@ -99,7 +108,7 @@ function DeleteItem(groupName, itemId) {
 
 // Client: CreateGroup
 function CreateGroup(name) {
-    console.log("Client: CreateGroup, " + groupName);
+    console.log("Client: CreateGroup, " + name);
     connection.invoke("CreateGroup", name).catch(function (err) {
         return console.error(err.toString());
     });
