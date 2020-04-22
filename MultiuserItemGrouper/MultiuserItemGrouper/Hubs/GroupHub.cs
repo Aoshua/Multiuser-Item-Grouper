@@ -35,8 +35,11 @@ namespace MultiuserItemGrouper.Hubs
         
         public async Task GetItemsInGroup(string groupName)
         {
-            string data = GroupManager.SerializeGroupForUser(groupName, Context.Items["username"].ToString());
-            await Clients.Caller.SendAsync("ReturnItemsInGroup", data);
+            if (Context.Items["username"] != null)
+            {
+                string data = GroupManager.SerializeGroupForUser(groupName, Context.Items["username"].ToString());
+                await Clients.Caller.SendAsync("ReturnItemsInGroup", data);
+            }
         }
 
         //todo : ishidden attr

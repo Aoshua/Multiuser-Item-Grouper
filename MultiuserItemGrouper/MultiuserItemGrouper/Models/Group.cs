@@ -27,6 +27,7 @@ namespace MultiuserItemGrouper.Models
         {
             SerializableGroup sg = new SerializableGroup();
             sg.Name = this.Name;
+            sg.Items = new List<SerializableItem>();
 
             foreach (Item item in Items)
             {
