@@ -71,16 +71,16 @@ function drawItems() {
 
 function addGroup() {
     var newGroupName = $('#txtNewGroupName').val();
-    //GroupCreated(newGroupName);
+    GroupCreated(newGroupName);
 }
 function addItem() {
     var newItemName = $('#txtItemName').val();
     var newItemBody = $('#txtItemBody').val();
     var newItemHidden = $('#chkItemHidden').prop('checked');
-    //AddItem(selectedGroup, newItemName, newItemBody, newItemHidden);
+    AddItem(selectedGroup, newItemName, newItemBody, newItemHidden);
 }
 function showEditItem(itemId, itemName, itemBody, itemHidden) {
-    //LockItem(selectedGroup, itemId); // Lock Item for edit
+    LockItem(selectedGroup, itemId); // Lock Item for edit
 
     // Append Edit Modal:
     var isHidden = "";
@@ -129,12 +129,12 @@ function editItem(itemId) {
 
     // todo? Remove the modal from body (currently seems like there is no need)
 
-    //UpdateItem(selectedGroup, itemId, newItemName, newItemBody, newItemHidden);
-    //UnlockItem(selectedGroup, itemId);
+    UpdateItem(selectedGroup, itemId, newItemName, newItemBody, newItemHidden);
+    UnlockItem(selectedGroup, itemId);
 }
 function deleteItem(itemId) {
     if (confirm("Are you sure you want to delete this item?")) {
-        //DeleteItem(selectedGroup, itemId);
+        DeleteItem(selectedGroup, itemId);
     }
 }
 
@@ -153,7 +153,7 @@ function selectGroup() {
 // Sends user to comm.js
 function setUser() {
     username = $('#hidUser').val();
-    //SetUsername(username);
+    SetUsername(username);
 }
 // Receives groups:
 function receiveGroups(jGroups) {
@@ -167,107 +167,107 @@ function receiveItems(jGroupItems) {
 }
 // Request groups:
 function requestGroups() {
-    //allGroups = GetGroupNames(); 
-    allGroups = {
-        "names": [
-            "group1",
-            "group2",
-            "group3"
-        ]
-    };
+    allGroups = GetGroupNames(); 
+    //allGroups = {
+    //    "names": [
+    //        "group1",
+    //        "group2",
+    //        "group3"
+    //    ]
+    //};
     bindGroupsCbo();
 }
 // Request items:
 function requestItems(selectedGroup) {
-    //groupItems = GetItemsInGroup(selectedGroup)
-    groupItems = {
-        "name": "picnicGroup",
-        "items": [
-            {
-                "id": 2,
-                "name": "basket",
-                "body": "A nice, woven basket.",
-                "isLocked": false,
-                "isHidden": true
-            },
-            {
-                "id": 3,
-                "name": "ugly basket",
-                "body": "A cheap basket we got on Craigslist.",
-                "isLocked": false,
-                "isHidden": true
-            },
-            {
-                "id": 5,
-                "name": "grapes",
-                "body": "Delicious, imported red grapes.",
-                "isLocked": true,
-                "isHidden": false
-            },
-            {
-                "id": 15,
-                "name": "bleu cheese",
-                "body": "Josh's favorite Floridian bleu cheese.",
-                "isLocked": false,
-                "isHidden": false
-            },
-            {
-                "id": 7000,
-                "name": "candy",
-                "body": "Tanner's favorite Reese's Pieces.",
-                "isLocked": true,
-                "isHidden": true
-            },
-            {
-                "id": 2,
-                "name": "basket 2",
-                "body": "A nice, woven basket.",
-                "isLocked": false,
-                "isHidden": false
-            },
-            {
-                "id": 3,
-                "name": "ugly basket 2",
-                "body": "A cheap basket we got on Craigslist.",
-                "isLocked": false,
-                "isHidden": true
-            },
-            {
-                "id": 5,
-                "name": "grapes 2",
-                "body": "Delicious, imported red grapes.",
-                "isLocked": true,
-                "isHidden": false
-            },
-            {
-                "id": 15,
-                "name": "bleu cheese 2",
-                "body": "Josh's favorite Floridian bleu cheese.",
-                "isLocked": false,
-                "isHidden": false
-            },
-            {
-                "id": 7000,
-                "name": "candy 2",
-                "body": "Tanner's favorite Reese's Pieces.",
-                "isLocked": true,
-                "isHidden": true
-            },
-            {
-                "id": 15,
-                "name": "bleu cheese 3",
-                "body": "Josh's favorite Floridian bleu cheese.",
-                "isLocked": false,
-                "isHidden": false
-            },
-            {
-                "id": 7000,
-                "name": "candy 3",
-                "body": "Tanner's favorite Reese's Pieces.",
-                "isLocked": true,
-                "isHidden": true
-            }
-        ]
-    };
+    groupItems = GetItemsInGroup(selectedGroup)
+    //groupItems = {
+    //    "name": "picnicGroup",
+    //    "items": [
+    //        {
+    //            "id": 2,
+    //            "name": "basket",
+    //            "body": "A nice, woven basket.",
+    //            "isLocked": false,
+    //            "isHidden": true
+    //        },
+    //        {
+    //            "id": 3,
+    //            "name": "ugly basket",
+    //            "body": "A cheap basket we got on Craigslist.",
+    //            "isLocked": false,
+    //            "isHidden": true
+    //        },
+    //        {
+    //            "id": 5,
+    //            "name": "grapes",
+    //            "body": "Delicious, imported red grapes.",
+    //            "isLocked": true,
+    //            "isHidden": false
+    //        },
+    //        {
+    //            "id": 15,
+    //            "name": "bleu cheese",
+    //            "body": "Josh's favorite Floridian bleu cheese.",
+    //            "isLocked": false,
+    //            "isHidden": false
+    //        },
+    //        {
+    //            "id": 7000,
+    //            "name": "candy",
+    //            "body": "Tanner's favorite Reese's Pieces.",
+    //            "isLocked": true,
+    //            "isHidden": true
+    //        },
+    //        {
+    //            "id": 2,
+    //            "name": "basket 2",
+    //            "body": "A nice, woven basket.",
+    //            "isLocked": false,
+    //            "isHidden": false
+    //        },
+    //        {
+    //            "id": 3,
+    //            "name": "ugly basket 2",
+    //            "body": "A cheap basket we got on Craigslist.",
+    //            "isLocked": false,
+    //            "isHidden": true
+    //        },
+    //        {
+    //            "id": 5,
+    //            "name": "grapes 2",
+    //            "body": "Delicious, imported red grapes.",
+    //            "isLocked": true,
+    //            "isHidden": false
+    //        },
+    //        {
+    //            "id": 15,
+    //            "name": "bleu cheese 2",
+    //            "body": "Josh's favorite Floridian bleu cheese.",
+    //            "isLocked": false,
+    //            "isHidden": false
+    //        },
+    //        {
+    //            "id": 7000,
+    //            "name": "candy 2",
+    //            "body": "Tanner's favorite Reese's Pieces.",
+    //            "isLocked": true,
+    //            "isHidden": true
+    //        },
+    //        {
+    //            "id": 15,
+    //            "name": "bleu cheese 3",
+    //            "body": "Josh's favorite Floridian bleu cheese.",
+    //            "isLocked": false,
+    //            "isHidden": false
+    //        },
+    //        {
+    //            "id": 7000,
+    //            "name": "candy 3",
+    //            "body": "Tanner's favorite Reese's Pieces.",
+    //            "isLocked": true,
+    //            "isHidden": true
+    //        }
+    //    ]
+    //};
     drawItems();
 }
