@@ -16,7 +16,7 @@ namespace MultiuserItemGrouper.Models
         public bool IsLocked { get; set; }
 
         //create item
-        public Item(string name, string body, string owner)
+        public Item(string name, string body, string owner, bool IsHidden)
         {
             // ItemIDs are based off the ItemCount,
             // which shall increment each time a new Item is created.
@@ -26,7 +26,7 @@ namespace MultiuserItemGrouper.Models
             this.Name = name;
             this.Body = body;
             this.Owner = owner;
-            this.IsHidden = false;
+            this.IsHidden = IsHidden;
             this.IsLocked = false;
         }
 

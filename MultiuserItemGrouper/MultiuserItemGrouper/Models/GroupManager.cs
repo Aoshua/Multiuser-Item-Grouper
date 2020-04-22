@@ -44,9 +44,9 @@ namespace MultiuserItemGrouper.Models
         }
 
         // todo the endless "what if the group doesn't exist?"
-        public static void AddItem(string owner, string groupName, string itemName, string itemBody)
+        public static void AddItem(string owner, string groupName, string itemName, string itemBody, bool IsHidden)
         {
-            FindGroupByName(groupName).Items.Add(new Item(itemName, itemBody, owner));
+            FindGroupByName(groupName).Items.Add(new Item(itemName, itemBody, owner, IsHidden));
         }
 
         // todo possibly add owner permission?

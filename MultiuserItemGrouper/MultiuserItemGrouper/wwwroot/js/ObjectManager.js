@@ -13,14 +13,17 @@ var isEditing;
 
 // Page load function:
 $(function () {
-    setUser();
-    requestGroups();
+    setLocalUser();
 });
 
+
 // Binds our list of group names to the group combo box:
-function bindGroupsCbo() {     
-    for (var i = 0; i < allGroups.names.length; i++) {
-        $('#cboGroup').append($('<option></option>').attr("value", allGroups.names[i]).text(allGroups.names[i]));
+function bindGroupsCbo() {
+
+    $('#cboGroup').empty();
+
+    for (group of allGroups) {
+        $('#cboGroup').append($('<option></option>').attr("value", group).text(group));
     }
 
     // For intial load:
@@ -32,10 +35,12 @@ function bindGroupsCbo() {
 
 // Dynamically draws our items
 function drawItems() {
+    console.log("UI: Drawing Items!!")
     var cont = $('#itemsContainer');
     cont.empty(); // Clear out old items
+    console.log("GroupItems length: " + groupItems.Items.length);
     if (groupItems.items.length > 0) {
-        for (var i = 0; i < groupItems.items.length; i++) {
+        for (var i = 0; i < groupItems.Items.length; i++) {
             if (i % 2 == 0) { // Add a new row if we have an even number (0 based)
                 cont.append("<div class='row'></div>");
                 cont = $('#itemsContainer > div');
@@ -45,19 +50,19 @@ function drawItems() {
                         <div class='col-sm-6'>
                             <div class= 'card mar-btm-10' >
                                 <div class='card-body'>
-                                    <div class='btn-container' title='Delete Item' style='float: right;' onclick='deleteItem("${groupItems.items[i].id}")'>
+                                    <div class='btn-container' title='Delete Item' style='float: right;' onclick='deleteItem("${groupItems.Items[i].Id}")'>
                                         <div class='btn-delete'>
                                             <i class='fa fa-times'></i>
                                         </div>
                                     </div>
-                                    <div id="btnHidden_${groupItems.items[i].id}" data-toggle="modal" data-target="#editItemModal_${groupItems.items[i].id}"></div>
-                                    <div class='btn-container' title='Edit Item' style='float: right;' onclick="showEditItem(${groupItems.items[i].id}, '${groupItems.items[i].name}', '${groupItems.items[i].body}', ${groupItems.items[i].isHidden})" >
+                                    <div id="btnHidden_${groupItems.Items[i].Id}" data-toggle="modal" data-target="#editItemModal_${groupItems.Items[i].Id}"></div>
+                                    <div class='btn-container' title='Edit Item' style='float: right;' onclick="showEditItem(${groupItems.Items[i].Id}, '${groupItems.Items[i].Name}', '${groupItems.Items[i].Body}', ${groupItems.Items[i].IsHidden})" >
                                         <div class='btn-edit'>
                                             <i class='fa fa-pencil'></i>
                                         </div>
                                     </div>
-                                    <h5 class='card-title'>${groupItems.items[i].name}</h5>
-                                    <p class='card-text'>${groupItems.items[i].body}</p>
+                                    <h5 class='card-title'>${groupItems.Items[i].Name}</h5>
+                                    <p class='card-text'>${groupItems.Items[i].Body}</p>
                                 </div>
                             </div>
                         </div>
@@ -153,23 +158,25 @@ function selectGroup() {
     GetItemsInGroup(selectedGroup);
 }
 // Sends user to comm.js
-function setUser() {
+function setLocalUser() {
     username = $('#hidUser').val();
-    SetUsername(username);
 }
 // Receives groups:
 function receiveGroups(jGroups) {
     allGroups = JSON.parse(jGroups);
+    console.log("allGroups: " + allGroups);
     bindGroupsCbo();
 }
 // Receives items:
 function receiveItems(jGroupItems) {
     groupItems = JSON.parse(jGroupItems)
+    console.log(groupItems);
     drawItems();
 }
 // Request groups:
 function requestGroups() {
     allGroups = GetGroupNames(); 
+    bindGroupsCbo();
     //allGroups = {
     //    "names": [
     //        "group1",

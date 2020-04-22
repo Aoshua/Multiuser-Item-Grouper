@@ -4,7 +4,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/grouphub").build()
 
 // Server: ReturnGroupNames
 connection.on("ReturnGroupNames", function (groupNames) {
-    console.log("Server: ReturnGroupNames");
+    console.log("Server: ReturnGroupNames, " + groupNames);
     receiveGroups(groupNames);
 });
 

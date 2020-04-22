@@ -24,10 +24,12 @@ namespace MultiuserItemGrouper.Hubs
         {
             switch (GroupManager.CreateGroup(name)) {
                 case GroupManager.CreateGroupResult.SUCCESS:
+                    await GetGroupNames();
                     await Clients.Caller.SendAsync("GroupCreated", name);
                     break;
                 case GroupManager.CreateGroupResult.FAIL:
                 default:
+                    await GetGroupNames();
                     await SendErrorMsg(Clients.Caller, "Group " + name + " not created.");
                     break;
             }
@@ -45,7 +47,7 @@ namespace MultiuserItemGrouper.Hubs
         //todo : ishidden attr
         public async Task AddItem(string groupName, string itemName, string itemBody, bool IsHidden)
         {
-            GroupManager.AddItem(Context.Items["username"].ToString(), groupName, itemName, itemBody);
+            GroupManager.AddItem(Context.Items["username"].ToString(), groupName, itemName, itemBody, IsHidden);
             await Clients.All.SendAsync("InEditedGroup", groupName);
         }
 
